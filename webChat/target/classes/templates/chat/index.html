@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script defer type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+	<script defer type="text/javascript" src="/js/myAjax.js"></script>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="parent">
+	<div class="me">
+		<div style="text-align:center" th:text="'Мое имя - '+ ${me}">me</div>
+		<p><a th:href="@{/auth/{id}/me(id=${id})}">Открыть профиль</a></p>
+	</div>
+	
+	<div class="block">
+		<div class="messageField">
+		<div id="dynamicDiv">
+			<div  th:each="message : ${log}" class="chat">
+			
+				<div th:if="${message.getSystemStatus()}==0 and ${message.getSender()}!=null" class="textAndTime">
+				    <div th:text="${message.getSender().getUsername()} + ': ' + ${message.getText()}">text</div>
+				    <div class="time" th:text="${message.getFormatedSend_at}">time</div>
+				</div>
+				<div th:if="${message.getSystemStatus()}==1" id="dateCenter" th:text="${message.getText()}">time
+				</div>
+						    
+			</div>
+		</div>
+		</div>
+		<div class="sending">
+			<form id="sendForm" th:method="POST" th:action="@{/chat}">
+			    <input type="text" name="message" placeholder="Введите сообщение"/>
+			    <input type="submit" value="Отправить!"/>
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

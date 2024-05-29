@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой профиль</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/auth/{id}(id=${person.getId()})}" th:object="${person}">
+    <label for="username">Моё имя: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Title Error</div>
+    <br/>
+    <label for="author">Мой год рождения: </label>
+    <input type="text" th:field="*{yearOfBirth}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}">Author Error</div>
+    <br/>
+    <label for="password">Мой пароль: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Year Error</div>
+    <br/>
+    <input type="submit" value="Сохранить"/>
+</form>
+<form th:method="DELETE" th:action="@{/auth/{id}(id=${person.getId()})}" th:object="${person}">
+    <input type="submit" value="Удалить профиль"/>
+</form>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Выйти"/>
+</form>
+</body>
+</html>
